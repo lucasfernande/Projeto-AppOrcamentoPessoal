@@ -19,12 +19,18 @@ function cadastrarDespesa() {
 	let valor = document.getElementById('valor')
 
 	// instanciando 
-	let despesa = new Despesa(
-		ano.value
-		mes.value
-		dia.value
-		tipo.value
-		descricao.value
+	let despesa = new Despesa (
+		ano.value,
+		mes.value,
+		dia.value,
+		tipo.value,
+		descricao.value,
 		valor.value
 	)
+	gravar(despesa)
+}
+
+function gravar(d) {
+	// acessando o local storage do navegador
+	localStorage.setItem('despesa', JSON.stringify(d)) // convertendo o objeto literal para uma anotação JSON
 }
