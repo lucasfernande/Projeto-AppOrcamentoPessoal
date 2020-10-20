@@ -1,11 +1,20 @@
 class Despesa {
-	constructor(ano, mes, dia, tipo, valor, descricao) {
+	constructor(ano, mes, dia, tipo, descricao, valor) {
 		this.ano = ano
 		this.mes = mes
 		this.dia = dia
 		this.tipo = tipo
 		this.descricao = descricao
 		this.valor = valor
+	}
+
+	validarDados() {
+		for(let i in this) {
+			if(this[i] == undefined || this[i] == '' || this[i] == null) {
+				return false	
+			}			
+		}
+		return true
 	}
 }
 
@@ -42,7 +51,7 @@ function cadastrarDespesa() {
 	let descricao = document.getElementById('descricao')
 	let valor = document.getElementById('valor')
 
-	// instanciando 
+	// instanciando um objeto despesa
 	let despesa = new Despesa (
 		ano.value,
 		mes.value,
@@ -51,7 +60,15 @@ function cadastrarDespesa() {
 		descricao.value,
 		valor.value
 	)
-	bd.gravar(despesa)
+
+	if (despesa.validarDados()) {
+		bd.gravar(despesa)
+		// console.log('Dados válidos')
+	}
+	else {
+		// console.log('Dados inválidos')
+	}
+
 }
 
 
