@@ -38,6 +38,24 @@ class BD {
 		localStorage.setItem(id, JSON.stringify(d))
 		localStorage.setItem('id', id)
 	}
+
+	recuperarTodosRegistros() {
+		let despesas = Array() // array de despesas
+		let id = localStorage.getItem('id')
+
+		// recuperando todas as despesas
+		for (let i = 1; i <= id; i++) {
+			// convertendo a despesa de JSON para objeto literal
+			let despesa = JSON.parse(localStorage.getItem(i))	
+
+			if (despesa == null) { // testando se existe um indice null
+				continue
+			}
+			
+			despesas.push(despesa) // adicionando no array de despesas
+		}
+		return despesas
+	}
 }
 
 let bd = new BD()
@@ -78,7 +96,12 @@ function cadastrarDespesa() {
 		document.getElementById('botao').className = 'btn btn-danger'
 		$('#modalRegistraDespesa').modal('show')
 	}
+}
 
+function carregaListaDespesas() {
+	let despesas = Array()
+	despesas = bd.recuperarTodosRegistros()
+	console.log(despesas)
 }
 
 
