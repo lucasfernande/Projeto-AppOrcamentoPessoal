@@ -56,6 +56,10 @@ class BD {
 		}
 		return despesas
 	}
+
+	pesquisar(despesa) {
+
+	}
 }
 
 let bd = new BD()
@@ -87,7 +91,7 @@ function cadastrarDespesa() {
 		document.getElementById('botao').innerHTML = 'OK'
 		document.getElementById('botao').className = 'btn btn-success'
 		$('#modalRegistraDespesa').modal('show')
-		
+
 		// limpando os campos
 		for(let i in despesa) {
 			document.getElementById(i).value = ''
@@ -135,6 +139,18 @@ function carregaListaDespesas() {
 		linha.insertCell(2).innerHTML = d.descricao
 		linha.insertCell(3).innerHTML = `R$ ${d.valor}`
 	})
+}
+
+function pesquisarDespesas() {
+	let ano = document.getElementById('ano').value
+	let mes = document.getElementById('mes').value
+	let dia = document.getElementById('dia').value
+	let tipo = document.getElementById('tipo').value
+	let descricao = document.getElementById('descricao').value
+	let valor = document.getElementById('valor').value
+
+	let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
+	console.log(despesa)
 }
 
 
