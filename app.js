@@ -9,6 +9,30 @@ class Despesa {
 	}
 }
 
+class BD {
+	constructor() {
+		let id = localStorage.getItem('id')
+		if (id === null) {
+			localStorage.setItem('id', 0)
+		}	
+	}
+
+	getProximoId() {
+		let proximoId = localStorage.getItem('id')
+		return parseInt(proximoId) + 1
+	}
+
+	gravar(d) {
+		// acessando o local storage do navegador
+	    // convertendo o objeto literal para uma anotação JSON
+		let id = this.getProximoId()
+		localStorage.setItem(id, JSON.stringify(d))
+		localStorage.setItem('id', id)
+	}
+}
+
+let bd = new BD()
+
 function cadastrarDespesa() {
 	// recuperando os dados do formulário de cadastro
 	let ano = document.getElementById('ano')
@@ -27,10 +51,8 @@ function cadastrarDespesa() {
 		descricao.value,
 		valor.value
 	)
-	gravar(despesa)
+	bd.gravar(despesa)
 }
 
-function gravar(d) {
-	// acessando o local storage do navegador
-	localStorage.setItem('despesa', JSON.stringify(d)) // convertendo o objeto literal para uma anotação JSON
-}
+
+
