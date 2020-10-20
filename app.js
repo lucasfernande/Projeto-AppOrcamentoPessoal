@@ -51,7 +51,7 @@ class BD {
 			if (despesa == null) { // testando se existe um indice null
 				continue
 			}
-			
+
 			despesas.push(despesa) // adicionando no array de despesas
 		}
 		return despesas
@@ -101,7 +101,35 @@ function cadastrarDespesa() {
 function carregaListaDespesas() {
 	let despesas = Array()
 	despesas = bd.recuperarTodosRegistros()
-	console.log(despesas)
+
+	// selecionando o tbody do consulta.html
+	let listaDespesas = document.getElementById('listaDespesas')
+
+	// percorrendo o array despesas e listando cada despesa
+	despesas.forEach(function(d) {
+		// criando a linha (tr), uma linha para cada despesa
+		let linha = listaDespesas.insertRow()
+
+		// criando a coluna (td), cada linha 4 colunas
+		linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`
+		// ajustando o tipo
+		switch(parseInt(d.tipo)) {
+			case 1: d.tipo = 'Alimentação'
+			break
+			case 2: d.tipo = 'Educação'
+			break
+			case 3: d.tipo = 'Lazer'
+			break
+			case 4: d.tipo = 'Saúde'
+			break
+			case 5: d.tipo = 'Transporte'
+			break
+		}
+
+		linha.insertCell(1).innerHTML = d.tipo
+		linha.insertCell(2).innerHTML = d.descricao
+		linha.insertCell(3).innerHTML = `R$ ${d.valor}`
+	})
 }
 
 
