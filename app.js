@@ -87,6 +87,11 @@ function cadastrarDespesa() {
 		document.getElementById('botao').innerHTML = 'OK'
 		document.getElementById('botao').className = 'btn btn-success'
 		$('#modalRegistraDespesa').modal('show')
+		
+		// limpando os campos
+		for(let i in despesa) {
+			document.getElementById(i).value = ''
+		}
 	}
 	else {
 		document.getElementById('exampleModalLabel').innerHTML = 'Erro ao Registrar'
