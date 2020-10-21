@@ -180,9 +180,15 @@ function carregaListaDespesas(despesas = Array(), filtro = false) {
 		btn.id = `id-despesa-${d.id}`
 		btn.onclick = function() {
 			let id = this.id.replace('id-despesa-', '')
-			bd.remover(id)
+			
+			document.getElementById('exampleModalLabel').innerHTML = 'Excluído!'
+			document.getElementById('exampleModalLabel').className = 'modal-title text-primary'
+			document.getElementById('msg').innerHTML = 'Despesa excluída com sucesso'
+			document.getElementById('botao').innerHTML = 'Recarregar'
+			document.getElementById('botao').className = 'btn btn-primary'
+			$('#modalDespesaExcluida').modal('show')
 
-			window.location.reload()
+			bd.remover(id)
 		}
 		linha.insertCell(4).append(btn)
 	})
